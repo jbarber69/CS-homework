@@ -1,1 +1,75 @@
+import datetime
+now = datetime.datetime.now()
 
+#allows you to add details to the files if you want
+
+#bankDetails = open('bankdetails.txt', 'a+')
+#
+#x = int(input("How many accounts do you want to add?: "))
+#
+#for i in range(0, x):
+#    name = input("Enter the account name: ")
+#    bankDetails.write(name)
+#    bankDetails.write(':')
+#    acc_no = input("Enter the account number(10 digits): ")
+#    bankDetails.write(acc_no)
+#    bankDetails.write(":")
+#    balance = input("Enter the account balance: ")
+#    bankDetails.write(balance + '\n')
+#
+#bankDetails.close()
+#
+#transactionFile = open('transactionfile.txt', 'a+')
+#
+#y = int(input("How many accounts do you want to update?: "))
+#
+#for r in range(0, y):
+#    acc_no2 = input("Enter the account number of the account you want to update: ")
+#    transactionFile.write(acc_no2)
+#    transactionFile.write(':')
+#    money = input("Enter the amount of money you want to add or subtract: ")
+#    transactionFile.write(money + '\n')
+#
+#transactionFile.close()
+
+transactionFile = open('transactionfile.txt', 'r')
+
+name = ("bankdetailsnew" + now.strftime("%Y-%m-%d %H:%M:%S") + '.txt' ) #gets the date and time
+
+bankDetailsNew = open(name, 'a+') #file is opened for appending
+
+for line in transactionFile:#loops through each line in the transaction file
+    #print(line)
+    find = ":" 
+    colon_pos = line.find(find, 0) #finds position of colon
+    #print(colon_pos)
+    #splits up the string 
+    acc_no = line[0:colon_pos]
+    print(acc_no)
+    tx_amount = float(line[colon_pos + 1:])
+    print(tx_amount)
+    bankDetails = open('bankdetails.txt', 'r')
+    for line2 in bankDetails:#loops through each line 
+        #print(line2)
+        if acc_no in line2:
+            print("found account")
+            print(line2)
+            #splits up the string
+            det_col_pos1 = line2.find(find, 0)
+            det_col_pos2 = line2.find(find, det_col_pos1 + 1)
+            c_name = line2[0:det_col_pos1]
+            bank_no = line2[det_col_pos1 + 1:det_col_pos2]
+            balance = float(line2[det_col_pos2 + 1:])
+            #print(c_name)
+            #print(bank_no)
+            #print(balance)
+            det_name = line2
+            new_balance = balance + tx_amount
+            print("new balance is:" ,new_balance)
+            new_balance = str(new_balance)
+            #print(str(new_balance))
+            bankDetailsNew.write(c_name + ':' + bank_no + ':' + new_balance + '\n') #writes to a new file
+        else:
+            print("account not found")
+            print(line2)
+    bankDetails.close()
