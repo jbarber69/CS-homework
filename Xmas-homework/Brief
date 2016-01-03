@@ -1,0 +1,29 @@
+A text file for a bank is stores customer details in the following manner
+ 
+name:account number:amount
+ 
+For example
+ 
+Flook:0123456789:550.76
+Barber:9876543210:10.43
+Smith:5678901234:00.11
+ 
+The account number is always ten digits long. Each day a transaction file of the spending/income to an account is used to update the 
+customer details file. The transaction file looks like the following
+ 
+account number:amount
+ 
+For example
+ 
+0123456789:-300.00
+9876543210:300.50
+ 
+This data is used to update the customer details file. So after updating with the above data, the customer details file would be
+ 
+Flook:0123456789:250.76
+Barber:9876543210:310.93
+Smith:5678901234:00.11
+ 
+Create a program which takes a customer details file and a transactions file and updates the information in the customer details file. 
+Do not delete or overwrite the old file, but save the updates in a new file with the system date appended to the end of the file name.
+ 
