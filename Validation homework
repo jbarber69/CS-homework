@@ -1,0 +1,45 @@
+price = 0
+rejectedNo = 0
+acceptedNo = 0
+totalWeight = 0
+totalPrice = 0
+NumberOfParcels = int(input("enter the number of parcels you want to post: "))
+for i in range(0, NumberOfParcels):
+    #set to true at the beginning of each loop
+    ParcelOk = True
+    width = float(input("enter width: "))
+    length =float(input("enter length: "))
+    height =float(input("enter height: "))
+    weight =float(input("enter weight: "))
+    Sum = float(length + width + height)
+
+    #checks the dimensions of the parcel
+    if length > 80 or width > 80 or height > 80:
+        ParcelOk = False
+        reason = "one or more of your dimensions is over 80 "
+    if Sum > 200:
+        ParcelOk = False
+        reason += " The sum of your dimensions is over 200 "
+    #checks the weight of the parcel
+    if weight < 1 or weight > 10:
+        ParcelOk = False
+        reason += " the weight must be in the range of 1-10"
+    if weight >=1 and weight <= 5:
+        price = 10
+    elif weight > 5 and weight <= 10:
+        price = 10 + ((weight - 5) )
+
+
+    if ParcelOk == False:
+        print("the parcel has been rejected because " + reason)
+        rejectedNo += 1
+
+    else:
+        print("Parcel is ok")
+        print("price of parcel is", price)
+        acceptedNo += 1
+        totalWeight += weight
+        totalPrice += price
+
+print(rejectedNo, "parcel(s) rejected", acceptedNo, "parcel(s) accepted, with a total weight of", totalWeight)
+print("the total price is", totalPrice)
